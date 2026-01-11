@@ -40,6 +40,21 @@ function apagarLista(){
     location.reload()
 }
 
+function alternarFeito(e:MouseEvent){
+    if (!(e.target as HTMLElement).matches('input')) return
+
+    const checkbox = e.target as HTMLInputElement
+    const checkboxIndex = Number(checkbox.dataset.index)
+
+    itens[checkboxIndex]!.feito = checkbox.checked
+
+    localStorage.setItem('itens', JSON.stringify(itens))
+
+    adicionarALista(itens, listaItens)
+}
+
 adicionarItens.addEventListener('submit', adicionarItem)
 
 apagar.addEventListener('click', apagarLista)
+
+listaItens.addEventListener('click', alternarFeito)
