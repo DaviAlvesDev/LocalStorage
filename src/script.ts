@@ -6,6 +6,7 @@ interface item {
 const adicionarItens = document.querySelector('.add-items') as HTMLFormElement
 const listaItens = document.querySelector('.pratos') as HTMLUListElement
 const itens:item[] = JSON.parse(localStorage.getItem('itens')?? '[]')
+const apagar = adicionarItens.querySelector('.clear-list') as HTMLButtonElement
 
 if (itens.length !== 0) adicionarALista(itens, listaItens)
 
@@ -34,4 +35,11 @@ function adicionarALista(itens:item[] = [], lista:HTMLUListElement) {
     lista.innerHTML = html
 }
 
+function apagarLista(){
+    localStorage.clear()
+    location.reload()
+}
+
 adicionarItens.addEventListener('submit', adicionarItem)
+
+apagar.addEventListener('click', apagarLista)
